@@ -1,0 +1,15 @@
+services:
+  financial-rag:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - .env
+    environment:
+      DATA_DIR: /app/data
+    volumes:
+      - financial-rag-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  financial-rag-data:

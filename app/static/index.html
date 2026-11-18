@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fa">
+    <title>Financial RAG Analyst</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Financial RAG Analyst home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span>Ledger<span class="brand-light">Lens</span></span>
+        </a>
+        <div class="topbar-right">
+          <label class="token-label" for="api-token">API token</label>
+          <input id="api-token" class="token-input" type="password" placeholder="Optional" autocomplete="off">
+          <span id="health-indicator" class="health-indicator"><i></i> Checking</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar">
+          <div class="sidebar-heading">
+            <div>
+              <p class="eyebrow">KNOWLEDGE BASE</p>
+              <h1>Your filings</h1>
+            </div>
+            <span id="document-count" class="count-pill">0</span>
+          </div>
+
+          <label id="dropzone" class="dropzone" for="file-input">
+            <span class="upload-icon" aria-hidden="true">↑</span>
+            <strong>Upload a filing</strong>
+            <span>PDF, HTML, Markdown or TXT</span>
+            <small id="upload-limit">Maximum size: checking…</small>
+            <input id="file-input" type="file" accept=".pdf,.html,.htm,.md,.txt">
+          </label>
+          <p id="upload-status" class="upload-status" role="status"></p>
+
+          <section class="documents-section" aria-labelledby="documents-title">
+            <div class="section-title-row">
+              <h2 id="documents-title">Indexed documents</h2>
+              <button id="refresh-documents" class="icon-button" type="button" aria-label="Refresh documents" title="Refresh">↻</button>
+            </div>
+            <div id="documents-list" class="documents-list">
+              <p class="empty-note">Your uploaded filings will appear here.</p>
+            </div>
+          </section>
+
+          <div class="sidebar-footnote">
+            <span class="shield-icon" aria-hidden="true">◈</span>
+            Documents stay in your configured data directory.
+          </div>
+        </aside>
+
+        <section class="chat-panel" aria-label="Financial document chat">
+          <div class="chat-heading">
+            <div>
+              <p class="eyebrow">RESEARCH ASSISTANT</p>
+              <h2>Ask your filings</h2>
+            </div>
+            <button id="clear-chat" class="text-button" type="button">New conversation</button>
+          </div>
+
+          <div id="conversation" class="conversation" aria-live="polite">
+            <div id="welcome" class="welcome-card">
+              <div class="welcome-symbol" aria-hidden="true">✳</div>
+              <p class="eyebrow">WELCOME TO LEDGERLENS</p>
+              <h3>Find the signal in the filing.</h3>
+              <p>Upload an annual report or SEC filing, then ask a question. Answers are grounded in the indexed text and linked to their source excerpts.</p>
+              <div class="suggestion-list">
+                <button class="suggestion" type="button">What were the main risk factors?</button>
+                <button class="suggestion" type="button">How did operating expenses change year over year?</button>
+                <button class="suggestion" type="button">Summarize the company's liquidity position.</button>
+              </div>
+            </div>
+          </div>
+
+          <form id="chat-form" class="composer">
+            <textarea id="question-input" rows="1" maxlength="2000" placeholder="Ask a question about your filings..." aria-label="Your question"></textarea>
+            <div class="composer-footer">
+              <span>Answers may be incomplete. Verify important figures against the filing.</span>
+              <button id="send-button" class="send-button" type="submit" aria-label="Send question">
+                <span>Ask</span><span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
